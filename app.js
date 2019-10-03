@@ -4,6 +4,31 @@
 
 var budgetController= (function(){
 
+    //initilizing the expense object
+    var Expense= function(id,description,value){
+        this.id=id;
+        this.description=description;
+        this.value=value;
+    };
+
+    var Income= function(id,description,value){
+        this.id=id;
+        this.description=description;
+        this.value=value;
+    };
+
+    var data={
+        allitems:{
+            allExpenses:[],
+            allIncomes:[]
+        },
+        totals:{
+            expense:0,
+            income:0
+        }
+    };
+    
+
 })();
 
 
@@ -47,7 +72,23 @@ var UIController= (function(){
 
 var controller= (function(budgetctrl,uictrl){
 
-    var DomStrings= UIController.getDOMStrings();
+    var setupEventlisteners=function(){
+        var DomStrings= UIController.getDOMStrings();
+        document.querySelector(DomStrings.inputBtn).addEventListener('click',controlAddItem);
+
+        document.addEventListener('keypress',function(event){
+        //console.log(event);
+        if(event.keyCode===13 || event.which===13){
+            //alert("Enter key was pressed");
+            controlAddItem();
+        }
+
+    });
+
+
+    }
+
+    
 
     var controlAddItem=(function(){
         //what happens when you click a button
@@ -68,15 +109,15 @@ var controller= (function(budgetctrl,uictrl){
         //alert("The function Add item Works");
 
     });
-    document.querySelector(DomStrings.inputBtn).addEventListener('click',controlAddItem);
 
-    document.addEventListener('keypress',function(event){
-        //console.log(event);
-        if(event.keyCode===13 || event.which===13){
-            //alert("Enter key was pressed");
-            controlAddItem();
+    return{
+        init: function(){
+            console.log("the application has started");
+            setupEventlisteners();
         }
-
-    });
+    }
+    
 
 })(budgetController,UIController);
+
+controller.init();
