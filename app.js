@@ -157,12 +157,12 @@ var UIController= (function(){
 
             if(type=== 'inc'){
                 element= DomStrings.incomeContainer;
-                html= '<div class="item clearfix" id="income-%id%"> <div class="item__description">%descprition%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+                html= '<div class="item clearfix" id="inc-%id%"> <div class="item__description">%descprition%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
 
             }
             else if(type==='exp'){
                 element=DomStrings.expenseContainer;
-                html='<div class="item clearfix" id="expense-%id"><div class="item__description">%descprition%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
+                html='<div class="item clearfix" id="exp-%id"><div class="item__description">%descprition%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
 
             }
             
@@ -170,6 +170,9 @@ var UIController= (function(){
             newHtml= html.replace('%id',obj.id);
             newHtml=newHtml.replace('%descprition%',obj.description);
             newHtml=newHtml.replace('%value%',obj.value);
+            // if(type==='exp'){
+            //     newHtml=newHtml.replace('21%',obj.percentage);
+            // }
 
 
             //insert the HTML into the DOM
