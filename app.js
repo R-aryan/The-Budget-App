@@ -218,6 +218,14 @@ var UIController= (function(){
         return(type==='exp'?'-':'+')+' '+integerPart+'.'+ decimal;
 
     };
+
+    var nodeListForEach= function(list,callback){
+
+        for(var i=0;i<list.length;i++){
+            callback(list[i],i);
+        }
+
+    };
     return{
         getInput: function(){
 
@@ -317,14 +325,6 @@ var UIController= (function(){
         displayPercentage:function(percentages){
             var fields=document.querySelectorAll(DomStrings.expensesPercLabel);
 
-            var nodeListForEach= function(list,callback){
-
-                for(var i=0;i<list.length;i++){
-                    callback(list[i],i);
-                }
-
-            };
-
             nodeListForEach(fields,function(current,index){
                 if(percentages[index]>0){
                     current.textContent=percentages[index]+'%';
@@ -356,6 +356,23 @@ var UIController= (function(){
 
         },
 
+        changedType:function(){
+            var fields;
+            fields = document.querySelectorAll(
+                DomStrings.inputType + ',' +
+                DomStrings.inputDescription + ',' +
+                DomStrings.inputValue);
+            
+            nodeListForEach(fields,function(cur){
+                cur.classList.toggle('red-focus');
+
+            });
+            document.querySelector(DomStrings.inputBtn).classList.toggle('red');
+
+
+
+        },
+
         getDOMStrings: function(){
             return DomStrings;
         }
@@ -380,6 +397,8 @@ var controller= (function(budgetctrl,uictrl){
         }
 
         document.querySelector(DomStrings.container).addEventListener('click',controlDeleteItem);
+
+        document.querySelector(DomStrings.inputType).addEventListener('change',UIController.changedType);
 
 
     });
