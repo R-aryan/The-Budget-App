@@ -442,7 +442,7 @@ var controller= (function(budgetctrl,uictrl){
 
         // 1. Get the data from the input field
         input= UIController.getInput();
-        console.log(input);
+        //console.log(input);
         
 
         if(input.description!="" && !isNaN(input.value) && input.value>0)
