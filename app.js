@@ -281,6 +281,32 @@ var UIController= (function(){
 
         },
 
+        displayPercentage:function(percentages){
+            var fields=document.querySelectorAll(DomStrings.expensesPercLabel);
+
+            var nodeListForEach= function(list,callback){
+
+                for(var i=0;i<list.length;i++){
+                    callback(list[i],i);
+                }
+
+            };
+
+            nodeListForEach(fields,function(current,index){
+                if(percentages[index]>0){
+                    current.textContent=percentages[index]+'%';
+                }
+
+                else{
+                    current.textContent='---';
+                }
+
+
+            });
+
+
+        },
+
         getDOMStrings: function(){
             return DomStrings;
         }
@@ -337,7 +363,7 @@ var controller= (function(budgetctrl,uictrl){
         var per= budgetController.getPercentages();
 
         //3. update the UI with the new percentages
-        console.log(per);
+        UIController.displayPercentage(per);
 
     }
 
